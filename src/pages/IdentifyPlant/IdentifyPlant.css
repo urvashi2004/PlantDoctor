@@ -1,0 +1,92 @@
+.identify-plant-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #646361; /* Background color */
+    color: white;
+  }
+  
+  .heading {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .buttons-container {
+    margin-bottom: 20px;
+  }
+  
+  .upload-button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    cursor: pointer;
+  }
+  
+  .upload-button i {
+    margin-right: 8px;
+  }
+  
+  .image-preview-container {
+    display: inline-block;
+    position: relative;
+    width: 70vw; /* 70% viewport width for mobile */
+    max-width: 90%; /* Max width for container */
+    margin: 20px auto;
+  }
+  
+  .image-preview {
+    position: relative;
+    margin: 0 auto;
+  }
+  
+  .image-label {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .uploaded-image {
+    width: 100%; /* Scale the image to fit within the container */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Cover the container, may crop if needed */
+    border: 1px solid #ddd; /* Optional border */
+  }
+  
+  .scan-button {
+    background-color: #008CBA; /* Blue */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    cursor: pointer;
+  }
+  
+  .retake-button {
+    background-color: #f44336; /* Red */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    cursor: pointer;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 20px;
+  }
+  
+  .results-section {
+    margin-top: 20px;
+  }  

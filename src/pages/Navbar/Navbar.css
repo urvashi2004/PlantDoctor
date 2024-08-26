@@ -1,13 +1,14 @@
-/* Navbar.css */
-
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-  }
+  position: fixed;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+}
   
   .navbar-logo {
     display: flex;
@@ -18,19 +19,26 @@
     height: 40px; /* Adjust the logo height as needed */
   }
   
-  .navbar-links {
+  
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
     display: flex;
-    gap: 20px;
-  }
-  
-  .navbar-link {
-    color: white;
+    justify-content: center;
+}
+
+.navbar ul li {
+    margin: 0 15px;
+}
+
+.navbar ul li a {
+    color: #fff;
     text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s;
-  }
-  
-  .navbar-link:hover {
-    color: #ddd;
-  }
-  
+    padding: 15px;
+    display: block;
+}
+
+.navbar ul li a:hover {
+    background-color: #555;
+}

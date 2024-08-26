@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 import LogoImage from './LogoImage.png'; // Ensure you have a logo image in the same directory
 
@@ -8,11 +9,11 @@ const Navbar = () => {
       <div className="navbar-logo">
         <img src={LogoImage} alt="Logo" className="logo-image" />
       </div>
-      <div className="navbar-links">
-        <a href="/" className="navbar-link">Home</a>
-        <a href="/identify" className="navbar-link">Identify Plant</a>
-        <a href="/disease" className="navbar-link">Check Disease</a>
-      </div>
+      <ul>
+          <li><Link to="home" smooth={true} duration={500}>Home</Link></li>
+          <li><Link to="identify-plant" smooth={true} duration={500}>Identify Plant</Link></li>
+          <li><Link to="check-disease" smooth={true} duration={500}>Check Disease</Link></li>
+      </ul>
     </nav>
   );
 };
