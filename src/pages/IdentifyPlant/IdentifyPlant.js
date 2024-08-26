@@ -8,12 +8,14 @@ const IdentifyPlant = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showButtons, setShowButtons] = useState(true);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
       setImage(URL.createObjectURL(file));
       setShowButtons(false); // Hide buttons after image is selected
+      setError(null);
     }
   };
 
@@ -24,25 +26,47 @@ const IdentifyPlant = () => {
   const handleRetake = () => {
     setImage(null);
     setResults(null);
+    setError(null);
     setShowButtons(true); // Show buttons again for retaking/reuploading
   };
 
   const handleScan = async () => {
-    setLoading(true);
-    setError(null); // Reset error
-    try {
-      const file = document.getElementById('file-input').files[0];
-      if (file) {
-        const response = await uploadImageToAPI(file);
-        setResults(response);
-      } else {
-        setError('No image selected.');
-      }
-    } catch (err) {
-      setError('Failed to fetch results. Please try again.');
-    }
-    setLoading(false);
-  };
+
+        setLoading(true);
+        setError(null);
+
+        try {
+            const file = document.getElementById('file-input').files[0];
+
+            if (file) {
+                const response = await uploadImageToAPI(file);
+
+                if (response && response.results) {
+                    setResults(response.results);
+                } else {
+                    setError('No results found. Please try again with a different image.');
+                }
+            } else {
+                setError('No image selected. Please upload or capture an image.');
+            }
+        } catch (err) {
+            console.error('Error during API call:', err);
+
+            if (err.message.includes('Network')) {
+                setError('Network error: Please check your internet connection.');
+              } else if (err.message.includes('403')) {
+                setError('API error: Unauthorized access. Please check your API key.');
+              } else if (err.message.includes('404')) {
+                setError('API error: Endpoint not found. Please check the URL.');
+              } else {
+                setError('An unexpected error occurred. Please try again later.');
+              }
+
+        } finally {
+            setLoading(false);
+        }
+    };
+
 
   return (
     <div className="identify-plant-container">
@@ -81,6 +105,7 @@ const IdentifyPlant = () => {
           </button>
         </div>
       )}
+
       {error && (
         <div className="error-message">
           <p>{error}</p>
