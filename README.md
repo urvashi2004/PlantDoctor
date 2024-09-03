@@ -1,6 +1,6 @@
 ﻿# PlantDoctor
 
-This was supposed to be a full stack project but server connection is having issues as of now so the final project as of now is present as terminal based project in Plant Doctor.ipynb.
+This was supposed to be a full stack project but server connection is having issues so the final project as of now is submitted as terminal based project in PlantDoctor.ipynb.
 
 There are two PlantDoctor.ipynb files.
 One in Colab folder and other outside.
