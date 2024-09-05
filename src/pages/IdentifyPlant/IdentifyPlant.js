@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './IdentifyPlant.css';
-import { uploadImageToAPI } from '../../api/api'; // Adjust the path as needed
+import { uploadImageToAPI } from './api'; // Adjust the path as needed
 
 const IdentifyPlant = () => {
   const [image, setImage] = useState(null);
@@ -8,7 +8,6 @@ const IdentifyPlant = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showButtons, setShowButtons] = useState(true);
-  const [uploadProgress, setUploadProgress] = useState(0);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -52,15 +51,25 @@ const IdentifyPlant = () => {
         } catch (err) {
             console.error('Error during API call:', err);
 
-            if (err.message.includes('Network')) {
-                setError('Network error: Please check your internet connection.');
-              } else if (err.message.includes('403')) {
-                setError('API error: Unauthorized access. Please check your API key.');
-              } else if (err.message.includes('404')) {
-                setError('API error: Endpoint not found. Please check the URL.');
-              } else {
-                setError('An unexpected error occurred. Please try again later.');
-              }
+            if (err.message.includes('400')) {
+              setError('API error: Bad Request. Reupload another image to identify.');
+            } else if (err.message.includes('401')) {
+              setError('API error: Unauthorized access. Please check your API key.');
+            } else if (err.message.includes('404')) {
+              setError('API error: Species not found in database.');
+            } else if (err.message.includes('413')) {
+              setError('API error: Payload too large.');
+            } else if (err.message.includes('414')) {
+              setError('API error: URI too long.');
+            } else if (err.message.includes('415')) {
+              setError('API error: Unsupported media type. Please upload another image.');
+            } else if (err.message.includes('429')) {
+              setError('API error: Too many requests. Please try again later.');
+            } else if (err.message.includes('500')) {
+              setError('API error: Internal server er. Please try again later.');
+            } else {
+              setError('An unexpected error occurred. Please try again later.');
+            }
 
         } finally {
             setLoading(false);
