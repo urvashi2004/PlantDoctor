@@ -1,4 +1,4 @@
-const apiKey = '2b10iBcUnPBl9JYeo7G1AKz9Su';
+const apiKey = 'REACT_APP_API_KEY';
 
 export const uploadImageToAPI = async (imageFile, setUploadProgress) => {
   const formData = new FormData();
