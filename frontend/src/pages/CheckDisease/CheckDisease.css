@@ -1,0 +1,79 @@
+/* General container styling for the Check Disease component */
+.check-disease {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+}
+
+/* Header for the Check Disease title */
+.check-disease-title {
+    color: #4F7942; /* Dark green */
+    margin-bottom: 10px;
+}
+
+/* Subtext below the title */
+.check-disease-description {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Styling for the file input element */
+.check-disease-file-input {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Submit button styling */
+.check-disease-submit-button {
+    padding: 10px 20px;
+    background-color: #4F7942; /* Dark green */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Submit button hover effect */
+.check-disease-submit-button:hover {
+    background-color: #3A5F3A; /* Slightly darker green */
+}
+
+/* Container for the uploaded image preview */
+.check-disease-image-preview {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.check-disease-image-preview p {
+    margin: 0;
+}
+
+/* Styling for the preview image */
+.check-disease-preview-image {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    border: 2px solid #4F7942;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    margin-top: 10px;
+}
+
+/* Container for the result text */
+.check-disease-result {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #8B4513; /* Saddle brown */
+}

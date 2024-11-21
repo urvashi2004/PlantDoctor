@@ -10,9 +10,9 @@ const Navbar = () => {
         <img src={LogoImage} alt="Logo" className="logo-image" />
       </div>
       <ul>
-          <li><Link to="home" smooth={true} duration={500}>Home</Link></li>
-          <li><Link to="identify-plant" smooth={true} duration={500}>Identify Plant</Link></li>
-          <li><Link to="check-disease" smooth={true} duration={500}>Check Disease</Link></li>
+          <li><Link to="/" smooth={true} duration={500}>Home</Link></li>
+          <li><Link to="/identify-plant" smooth={true} duration={500}>Identify Plant</Link></li>
+          <li><Link to="/check-disease" smooth={true} duration={500}>Check Disease</Link></li>
       </ul>
     </nav>
   );

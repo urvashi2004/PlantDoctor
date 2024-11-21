@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router} from 'react-router-dom';
-import './App.css';  // Add your CSS file here
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './App.css'; // Custom CSS
 
 import Navbar from './pages/Navbar/Navbar';
 import Home from './pages/Home/Home';
@@ -12,15 +12,11 @@ const App = () => {
         <Router>
             <Navbar />
             <div className="main-content">
-                <section id="home">
-                    <Home />
-                </section>
-                <section id="identify-plant">
-                    <IdentifyPlant />
-                </section>
-                <section id="check-disease">
-                    <CheckDisease />
-                </section>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/identify-plant" element={<IdentifyPlant />} />
+                    <Route path="/check-disease" element={<CheckDisease />} />
+                </Routes>
             </div>
         </Router>
     );

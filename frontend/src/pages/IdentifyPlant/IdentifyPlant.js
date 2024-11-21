@@ -66,7 +66,7 @@ const IdentifyPlant = () => {
             } else if (err.message.includes('429')) {
               setError('API error: Too many requests. Please try again later.');
             } else if (err.message.includes('500')) {
-              setError('API error: Internal server er. Please try again later.');
+              setError('API error: Internal server error. Please try again later.');
             } else {
               setError('An unexpected error occurred. Please try again later.');
             }

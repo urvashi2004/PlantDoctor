@@ -1,120 +1,122 @@
+/* Container for the Identify Plant component */
 .identify-plant-container {
-    text-align: center;
-    padding: 20px;
-    background-color: #646361; /* Background color */
-    color: white;
-  }
-  
-  .heading {
-    font-size: 2em;
-    margin-bottom: 20px;
-  }
-  
-  .buttons-container {
-    margin-bottom: 20px;
-  }
-  
-  .upload-button {
-    background-color: #4CAF50; /* Green */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 5px;
-    cursor: pointer;
-  }
-  
-  .upload-button i {
-    margin-right: 8px;
-  }
-  
-  .image-preview-container {
-    display: inline-block;
-    position: relative;
-    width: 70vw; /* 70% viewport width for mobile */
-    max-width: 90%; /* Max width for container */
-    margin: 20px auto;
-  }
-  
-  .image-preview {
-    position: relative;
-    margin: 0 auto;
-  }
-  
-  .image-label {
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .uploaded-image {
-    width: 100%; /* Scale the image to fit within the container */
-    height: auto; /* Maintain aspect ratio */
-    object-fit: cover; /* Cover the container, may crop if needed */
-    border: 1px solid #ddd; /* Optional border */
-  }
-  
-  .scan-button {
-    background-color: #008CBA; /* Blue */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 5px;
-    cursor: pointer;
-  }
-  
-  .retake-button {
-    background-color: #f44336; /* Red */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 5px;
-    cursor: pointer;
-  }
-  
-  .error-message {
-    color: red;
-    margin-top: 20px;
-  }
-  
-  .results-section {
-    margin-top: 20px;
-  }  
+  text-align: center;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 600px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
 
-  .progress-bar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px 0;
-  }
-  
-  .progress-text {
-    font-size: 16px;
-    margin-bottom: 5px;
-    color: #000;
-  }
-  
-  .progress-bar {
-    width: 80%; /* Adjust the width as needed */
-    height: 20px; /* Adjust the height as needed */
-    background-color: #e0e0e0;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  
-  .progress-bar-fill {
-    height: 100%;
-    background-color: #007bff; /* Blue color for progress */
-    transition: width 0.3s ease-in-out;
-  }
-  
+/* Header for the Identify Plant title */
+.heading {
+  font-size: 28px;
+  color: #4F7942; /* Dark green */
+  margin-bottom: 20px;
+}
+
+/* Styling for the container holding the buttons */
+.buttons-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+/* Style for the upload buttons */
+.upload-button {
+  padding: 12px 25px;
+  background-color: #4F7942; /* Dark green */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Upload button hover effect */
+.upload-button:hover {
+  background-color: #3A5F3A;
+}
+
+/* Style for the camera icon in the button */
+.upload-button i {
+  margin-right: 8px;
+}
+
+/* Image preview container */
+.image-preview-container {
+  margin-top: 20px;
+}
+
+/* Styling for the image preview */
+.image-preview {
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.image-label {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Styling for the uploaded image */
+.uploaded-image {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  border: 2px solid #4F7942;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Styling for the scan and retake buttons */
+.scan-button, .retake-button {
+  padding: 10px 20px;
+  background-color: #4F7942;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+/* Hover effect for scan and retake buttons */
+.scan-button:hover, .retake-button:hover {
+  background-color: #3A5F3A;
+}
+
+/* Disabled button style (for loading state) */
+.scan-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Styling for the error message */
+.error-message {
+  margin-top: 20px;
+  color: #D32F2F; /* Red */
+  font-weight: bold;
+}
+
+/* Results section styling */
+.results-section {
+  margin-top: 20px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading text styling */
+.loading {
+  color: #ff9800; /* Orange */
+  font-weight: bold;
+}
