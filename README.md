@@ -1,7 +1,7 @@
 # Plant Doctor
 
 
-![Plant Doctor Logo](frontend/public/favicon.ico)
+![Plant Doctor Logo](frontend/src/images/LogoImage.png)
 
 **Plant Doctor** is an interactive platform that allows users to identify plant species of plants based on images of their leaves, stems, flowers, or fruits. By leveraging machine learning and computer vision techniques, the app can analyze images of leaves of plants and identify whether it is healthy or not depending on the limited data set used to train the model including potato, tomato and bell pepper leaves.
 
