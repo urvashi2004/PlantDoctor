@@ -1,11 +1,26 @@
-﻿# PlantDoctor
+# Plant Doctor
 
-This was supposed to be a full stack project but server connection is having issues so the final project as of now is submitted as terminal based project in PlantDoctor.ipynb.
+**Plant Doctor** is an interactive platform that allows users to identify plant species of plants based on images of their leaves, stems, flowers, or fruits. By leveraging machine learning and computer vision techniques, the app can analyze images of leaves of plants and identify whether it is healthy or not depending on the limited data set used to train the model including potato, tomato and bell pepper leaves.
 
-There are two PlantDoctor.ipynb files.
-One in Colab folder and other outside.
-The Colab folder file has a cleaner output, otherwise no changes are present.
+## Features
 
-To run it in your device, you might need to use PlantDiseaseModel.h5 file.
-Link for accessing it is https://drive.google.com/file/d/1pTaW5TxwyMjHQoKPc2xD5xFpal1e832V/view?usp=sharing as it is too big to be uploaded on git.
-This is the link for colab file of working model https://colab.research.google.com/drive/14aMVuMo_yRzistPM1t2E-YOmQus76bwC?usp=sharing
+- **Plant Identification**: Upload images of plants (leaves, stems, flowers or fruits) and get accurate plant species identification.
+- **Plant Health Diagnosis**: Analyze leaves images to assess the health of plants, detect any diseases or issues.
+- **User-Friendly Interface**: Clean and interactive frontend built using ReactJS, making it easy to upload images and view results.
+- **Real-time Predictions**: Get real-time diagnoses and plant details from the backend model.
+
+## Technologies Used
+
+- **Frontend**: 
+  - ReactJS
+  - HTML
+  - CSS
+- **Backend**:
+  - Python (FastAPI)
+  - TensorFlow (for model inference)
+  - PlantNet API (for plant identification)
+
+### Prerequisites
+
+- **Node.js** (for frontend) – [Install Node.js](https://nodejs.org/)
+- **Python** (for backend model) – [Install Python](https://www.python.org/downloads/)
