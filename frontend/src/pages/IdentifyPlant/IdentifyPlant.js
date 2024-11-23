@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './IdentifyPlant.css';
-import { uploadImageToAPI } from './api'; // Adjust the path as needed
+import { uploadImageToAPI } from './api';
 
 const IdentifyPlant = () => {
   const [image, setImage] = useState(null);
@@ -8,6 +8,7 @@ const IdentifyPlant = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showButtons, setShowButtons] = useState(true);
+  const [category, setCategory] = useState('kt'); 
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -30,52 +31,40 @@ const IdentifyPlant = () => {
   };
 
   const handleScan = async () => {
+    setLoading(true);
+    setError(null);
 
-        setLoading(true);
-        setError(null);
+    try {
+      const file = document.getElementById("file-input").files[0];
 
-        try {
-            const file = document.getElementById('file-input').files[0];
+      if (!file) {
+        setError("No image selected. Please upload or capture an image.");
+        return;
+      }
 
-            if (file) {
-                const response = await uploadImageToAPI(file);
+      console.log("Uploading file:", file); // Debugging
 
-                if (response && response.results) {
-                    setResults(response.results);
-                } else {
-                    setError('No results found. Please try again with a different image.');
-                }
-            } else {
-                setError('No image selected. Please upload or capture an image.');
-            }
-        } catch (err) {
-            console.error('Error during API call:', err);
+      const response = await uploadImageToAPI(file, category);
 
-            if (err.message.includes('400')) {
-              setError('API error: Bad Request. Reupload another image to identify.');
-            } else if (err.message.includes('401')) {
-              setError('API error: Unauthorized access. Please check your API key.');
-            } else if (err.message.includes('404')) {
-              setError('API error: Species not found in database.');
-            } else if (err.message.includes('413')) {
-              setError('API error: Payload too large.');
-            } else if (err.message.includes('414')) {
-              setError('API error: URI too long.');
-            } else if (err.message.includes('415')) {
-              setError('API error: Unsupported media type. Please upload another image.');
-            } else if (err.message.includes('429')) {
-              setError('API error: Too many requests. Please try again later.');
-            } else if (err.message.includes('500')) {
-              setError('API error: Internal server error. Please try again later.');
-            } else {
-              setError('An unexpected error occurred. Please try again later.');
-            }
+      if (response && response.results) {
+        setResults(response.results);
+      } else {
+        setError("No results found. Please try again with a different image.");
+      }
+    } catch (err) {
+      console.error("Error during API call:", err);
 
-        } finally {
-            setLoading(false);
-        }
-    };
-
+      if (err.message.includes("404")) {
+        setError("API error: Endpoint not found. Please check the API URL.");
+      } else if (err.message.includes("401")) {
+        setError("API error: Unauthorized. Check your API key.");
+      } else {
+        setError(`An unexpected error occurred: ${err.message}`);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="identify-plant-container">
@@ -93,6 +82,18 @@ const IdentifyPlant = () => {
           </button>
         </div>
       )}
+
+      {/* Category Selection */}
+      <div className="category-selector">
+        <label htmlFor="category">Select Plant Category: </label>
+        <select id="category" onChange={(e) => setCategory(e.target.value)}>
+          <option value="kt">KT (Generic)</option>
+          <option value="flower">Flower</option>
+          <option value="tree">Tree</option>
+          {/* Add other categories here */}
+        </select>
+      </div>
+
       <input
         id="file-input"
         type="file"
@@ -100,6 +101,7 @@ const IdentifyPlant = () => {
         onChange={handleImageUpload}
         style={{ display: 'none' }}
       />
+      
       {image && (
         <div className="image-preview-container">
           <div className="image-preview">
@@ -120,6 +122,7 @@ const IdentifyPlant = () => {
           <p>{error}</p>
         </div>
       )}
+
       {results && (
         <div className="results-section">
           <h2>Results:</h2>

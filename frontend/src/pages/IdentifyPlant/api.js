@@ -1,33 +1,56 @@
-const apiKey = 'REACT_APP_API_KEY';
+export const uploadImageToAPI = async (imageFile, category, setUploadProgress) => {
+  const apiKey = process.env.REACT_APP_API_KEY;
+  console.log('API Key:', apiKey);  // Add this line to check if API key is correctly loaded
 
-export const uploadImageToAPI = async (imageFile, setUploadProgress) => {
-  const formData = new FormData();
-  formData.append('images', imageFile);
 
-  try {
-      const response = await fetch(`/api/v2/identify/all?include-related-images=true&no-reject=false&nb-results=5&lang=en&type=kt&api-key=${apiKey}`, {
-          method: 'POST',
-          body: formData,
-      });
-
-      if (!response.ok) {
-        const errorDetails = await response.text();
-        console.error('Error details:', errorDetails);
-        throw new Error(`Network response was not ok: ${response.status} ${response.statusText}. Details: ${JSON.stringify(errorDetails)}`);
-      }
-
-      const contentType = response.headers.get('content-type');
-      let data;
-      if (contentType && contentType.includes('application/json')) {
-        data = await response.json(); // Parse JSON if content type is JSON
-      } else {
-        const text = await response.text(); // Otherwise, read as text
-        console.error('Unexpected content type:', contentType, 'Response:', text);
-        throw new Error(`Unexpected content type: ${contentType}. Response: ${text}`);
-      }
-      return data;
-  } catch (error) {
-      console.error('Error uploading image:', error);
-      throw error;
+  if (!apiKey) {
+    throw new Error('API key is missing. Check your .env configuration.');
   }
+
+  const formData = new FormData();
+  formData.append('images', imageFile); // Append the image file
+  formData.append('category', category); // Include the category
+
+  // Your local proxy URL
+  const API_URL = 'http://localhost:4000/api/plantnet';
+
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', API_URL);
+
+    // Add required headers (CORS should be handled by proxy)
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+    xhr.upload.onprogress = (event) => {
+      if (setUploadProgress) {
+        setUploadProgress(Math.round((event.loaded / event.total) * 100));
+      }
+    };
+
+    xhr.onload = () => {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        const contentType = xhr.getResponseHeader('content-type');
+        if (contentType.includes('application/json')) {
+          resolve(JSON.parse(xhr.responseText));
+        } else {
+          reject(new Error(`Unexpected content type: ${contentType}`));
+        }
+      } else {
+        console.error('Response Details:', xhr.responseText);
+        reject(new Error(`Upload failed with status: ${xhr.status} (${xhr.statusText}). Response: ${xhr.responseText}`));
+      }
+    };
+
+    xhr.onerror = () => {
+      console.error('XHR Error Details:', {
+        status: xhr.status,
+        statusText: xhr.statusText,
+        response: xhr.responseText,  // Log the response text for better debugging
+      });
+      reject(new Error(`A network error occurred. Check your connection or the API URL.`));
+    };
+    
+
+    xhr.send(formData);
+  });
 };
