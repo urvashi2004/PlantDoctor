@@ -1,24 +1,15 @@
 export const uploadImageToAPI = async (imageFile, category, setUploadProgress) => {
-  const apiKey = process.env.REACT_APP_API_KEY;
-  console.log('API Key:', apiKey);  // Add this line to check if API key is correctly loaded
-
-
-  if (!apiKey) {
-    throw new Error('API key is missing. Check your .env configuration.');
-  }
 
   const formData = new FormData();
-  formData.append('images', imageFile); // Append the image file
-  formData.append('category', category); // Include the category
+  formData.append('image', imageFile); 
+  formData.append('category', category); 
 
-  // Your local proxy URL
   const API_URL = 'http://localhost:4000/api/plantnet';
 
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', API_URL);
 
-    // Add required headers (CORS should be handled by proxy)
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
     xhr.upload.onprogress = (event) => {
@@ -45,7 +36,7 @@ export const uploadImageToAPI = async (imageFile, category, setUploadProgress) =
       console.error('XHR Error Details:', {
         status: xhr.status,
         statusText: xhr.statusText,
-        response: xhr.responseText,  // Log the response text for better debugging
+        response: xhr.responseText,  
       });
       reject(new Error(`A network error occurred. Check your connection or the API URL.`));
     };

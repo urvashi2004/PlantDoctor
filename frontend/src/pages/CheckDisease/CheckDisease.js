@@ -35,21 +35,20 @@ const CheckDisease = () => {
       if (response.ok) {
         const prediction = data.prediction;
 
-        // Parse result
         let plantName = "";
         let healthStatus = "";
         let diseaseName = "";
 
         if (prediction.includes("healthy")) {
           healthStatus = "Healthy";
-          plantName = prediction.split("_")[0]; // Extract plant name
-          diseaseName = ""; // No disease for healthy plants
+          plantName = prediction.split("_")[0]; 
+          diseaseName = ""; 
         } else {
           healthStatus = "Unhealthy";
-          plantName = prediction.split("_")[0]; // Extract plant name
+          plantName = prediction.split("_")[0]; 
           diseaseName = prediction
-            .replace(/.*__/, "") // Remove plant prefixes like "Tomato__"
-            .replace(/_/g, " "); // Replace underscores with spaces
+            .replace(/.*__/, "")
+            .replace(/_/g, " "); 
         }
 
         setResult({
@@ -58,7 +57,7 @@ const CheckDisease = () => {
           diseaseName,
         });
       } else {
-        setResult({ error: data.error }); // Display error message
+        setResult({ error: data.error });
       }
     } catch (error) {
       setResult({ error: "An error occurred. Please try again." });

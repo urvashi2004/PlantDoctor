@@ -14,7 +14,7 @@ const IdentifyPlant = () => {
     const file = event.target.files[0];
     if (file) {
       setImage(URL.createObjectURL(file));
-      setShowButtons(false); // Hide buttons after image is selected
+      setShowButtons(false);
       setError(null);
     }
   };
@@ -27,7 +27,7 @@ const IdentifyPlant = () => {
     setImage(null);
     setResults(null);
     setError(null);
-    setShowButtons(true); // Show buttons again for retaking/reuploading
+    setShowButtons(true);
   };
 
   const handleScan = async () => {
@@ -42,7 +42,7 @@ const IdentifyPlant = () => {
         return;
       }
 
-      console.log("Uploading file:", file); // Debugging
+      console.log("Uploading file:", file); 
 
       const response = await uploadImageToAPI(file, category);
 
@@ -66,6 +66,34 @@ const IdentifyPlant = () => {
     }
   };
 
+  const renderResults = (results) => {
+    return results.map((result, index) => (
+      <div key={index} className="result-item">
+        <h3>Result {index + 1}</h3>
+        <div>
+          <strong>Scientific Name: </strong>
+          {result.species.scientificName}
+        </div>
+        <div>
+          <strong>Common Names: </strong>
+          {result.species.commonNames.join(', ')}
+        </div>
+        <div>
+          <strong>Genus: </strong>
+          {result.species.genus.scientificName}
+        </div>
+        <div>
+          <strong>Family: </strong>
+          {result.species.family.scientificName}
+        </div>
+        <div>
+          <strong>Score: </strong>
+          {result.score}
+        </div>
+      </div>
+    ));
+  };
+
   return (
     <div className="identify-plant-container">
       <h1 className="heading">Identify Plant</h1>
@@ -83,7 +111,6 @@ const IdentifyPlant = () => {
         </div>
       )}
 
-      {/* Category Selection */}
       <div className="category-selector">
         <label htmlFor="category">Select Plant Category: </label>
         <select id="category" onChange={(e) => setCategory(e.target.value)}>
@@ -108,12 +135,14 @@ const IdentifyPlant = () => {
             <p className="image-label">Uploaded Image</p>
             <img src={image} alt="Plant" className="uploaded-image" />
           </div>
-          <button className="scan-button" onClick={handleScan} disabled={loading}>
-            {loading ? <span className="loading">Loading...</span> : 'Scan Image'}
-          </button>
-          <button className="retake-button" onClick={handleRetake}>
-            Retake/Reupload
-          </button>
+          <div className="buttons-container">
+            <button className="scan-button" onClick={handleScan} disabled={loading}>
+              {loading ? <span className="loading">Loading...</span> : 'Scan Image'}
+            </button>
+            <button className="retake-button" onClick={handleRetake}>
+              Retake/Reupload
+            </button>
+          </div>
         </div>
       )}
 
@@ -126,7 +155,9 @@ const IdentifyPlant = () => {
       {results && (
         <div className="results-section">
           <h2>Results:</h2>
-          <pre>{JSON.stringify(results, null, 2)}</pre>
+          <div className="results-list">
+            {renderResults(results)}
+          </div>
         </div>
       )}
     </div>
